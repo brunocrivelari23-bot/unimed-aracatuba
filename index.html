@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unimed Araçatuba</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+
+body {
+    /* Ajuste para acomodar o novo volume de botões na parte verde */
+    background: linear-gradient(to bottom, #00995D 78%, #B1D34B 78%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* LOADER */
+.loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #00995D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: .5s;
+}
+.loader.hide { opacity: 0; visibility: hidden; }
+.loader img { width: 150px; animation: pulse 1.2s infinite; }
+
+@keyframes pulse {
+    0%,100% {transform: scale(1); opacity:.7;}
+    50% {transform: scale(1.1); opacity:1;}
+}
+
+/* ANIMAÇÕES */
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    width: 100%;
+    max-width: 600px; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 25px;
+}
+
+.top-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.logo { 
+    width: 240px; 
+    max-width: 85%;
+    height: auto;
+    margin-bottom: 20px; 
+}
+
+.subtitle {
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.links-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 60px;
+}
+
+.link-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.circle {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%;
+    background: #004B2F;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.wpp-circle { background: #F39200; }
+
+.btn {
+    flex-grow: 1;
+    padding: 14px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #004B2F;
+    text-align: center;
+    background: #CFE3C9;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 14px;
+}
+.btn:hover { 
+    background: #ffffff; 
+    transform: scale(1.02); 
+}
+
+/* BARRA CENTRAL */
+.social-header {
+    background: #004B2F;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: auto; 
+    margin-bottom: -22px; 
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* SEÇÃO DE REDES SOCIAIS */
+.bottom-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px; 
+}
+
+.social-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.social-unit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.social-unit:hover { transform: translateY(-3px); }
+
+.s-circle {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #00995D;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.s-pill {
+    background: #F39200;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.copyright {
+    font-size: 11px;
+    color: #004B2F;
+    font-weight: bold;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+/* Ajuste Mobile */
+@media (max-width: 500px) {
+    .container { padding: 30px 15px; }
+    body { background: linear-gradient(to bottom, #00995D 82%, #B1D34B 82%); }
+    .social-header { margin-bottom: -22px; font-size: 13px; }
+    .btn { font-size: 13px; padding: 12px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+    <img src="logo.svg" alt="Carregando...">
+</div>
+
+<div class="container">
+    <div class="top-section">
+        <img src="logo.svg" class="logo fade-up" alt="Unimed Araçatuba">
+        <p class="subtitle fade-up delay-1">Como podemos te ajudar hoje?</p>
+
+        <div class="links-area">
+            <div class="link-row fade-up delay-1">
+                <div class="circle wpp-circle"><i class="fab fa-whatsapp"></i></div>
+                <a href="https://wa.me/551836361300" target="_blank" class="btn">Fale conosco pelo WhatsApp</a>
+            </div>
+
+            <div class="link-row fade-up delay-2">
+                <div class="circle"><i class="fas fa-globe"></i></div>
+                <a href="https://www.unimed.coop.br/site/web/aracatuba" target="_blank" class="btn">Site Oficial</a>
+            </div>
+
+            <div class="link-row fade-up delay-3">
+                <div class="circle"><i class="fas fa-mobile-alt"></i></div>
+                <a href="https://www.unimed.coop.br/site/web/aracatuba" target="_blank" class="btn">Baixe o App Unimed</a>
+            </div>
+
+            <div class="link-row fade-up delay-4">
+                <div class="circle"><i class="fas fa-hospital-user"></i></div>
+                <a href="https://paciente.conexasaude.com.br/login/" target="_blank" class="btn">Entre no nosso PA Virtual</a>
+            </div>
+
+            <div class="link-row fade-up delay-5">
+                <div class="circle"><i class="fas fa-procedures"></i></div>
+                <a href="https://unimedaracatuba.drnext.com.br/" target="_blank" class="btn">Acompanhe o status da cirurgia</a>
+            </div>
+
+            <div class="link-row fade-up delay-6">
+                <div class="circle"><i class="fas fa-phone-alt"></i></div>
+                <a href="tel:+551836361300" class="btn">Central de Atendimento</a>
+            </div>
+        </div>
+
+        <div class="social-header fade-up delay-6">
+            Nos siga em nossas redes sociais!
+        </div>
+    </div>
+
+    <div class="bottom-section fade-up delay-6">
+        <div class="social-grid">
+            <a href="https://instagram.com/unimedaracatuba" target="_blank" class="social-unit">
+                <div class="s-circle"><i class="fab fa-instagram"></i></div>
+                <div class="s-pill">Instagram</div>
+            </a>
+            <a href="https://linkedin.com/company/unimedaracatuba" target="_blank" class="social-unit">
+                <div class="s-circle"><i class="fab fa-linkedin-in"></i></div>
+                <div class="s-pill">LinkedIn</div>
+            </a>
+            <a href="https://www.youtube.com/@UnimedAracatuba-q2q" target="_blank" class="social-unit">
+                <div class="s-circle"><i class="fab fa-youtube"></i></div>
+                <div class="s-pill">YouTube</div>
+            </a>
+            <a href="https://facebook.com/unimedaracatuba" target="_blank" class="social-unit">
+                <div class="s-circle"><i class="fab fa-facebook-f"></i></div>
+                <div class="s-pill">Facebook</div>
+            </a>
+        </div>
+        <p class="copyright">© 2026 Unimed Araçatuba - Todos os direitos reservados</p>
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("hide");
+    }, 600);
+});
+</script>
+
+</body>
+</html>
